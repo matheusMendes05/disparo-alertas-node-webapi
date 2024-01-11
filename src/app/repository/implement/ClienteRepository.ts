@@ -11,4 +11,8 @@ export class ClienteRepository implements IClienteRepository {
     const data = await this.cliente.save(cliente);
     return data;
   }
+  async get(id: string): Promise<Cliente> {
+    const data = await this.cliente.findOneBy({ id: id });
+    return data;
+  }
 }
