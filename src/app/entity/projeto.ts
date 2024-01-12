@@ -2,13 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Projeto } from './projeto';
+import { Cliente } from './cliente';
 
-@Entity('cliente')
-export class Cliente {
+@Entity('projeto')
+export class Projeto {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -24,6 +24,6 @@ export class Cliente {
   @CreateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Projeto, (projeto) => projeto.cliente)
-  projeto: Projeto[];
+  @ManyToOne(() => Cliente, (cliente) => cliente.projeto)
+  cliente: Cliente;
 }
