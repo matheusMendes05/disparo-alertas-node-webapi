@@ -16,7 +16,11 @@ export class ClienteRepository implements IClienteRepository {
     return data;
   }
   async list(): Promise<Cliente[]> {
-    const data = await this.cliente.find();
+    const data = await this.cliente.find({
+      relations: {
+        projeto: true,
+      },
+    });
     return data;
   }
   async delete(id: string): Promise<void> {
