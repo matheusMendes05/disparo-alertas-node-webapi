@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Cliente } from './cliente';
+import { Dynamics } from './dynamics';
 
 @Entity('projeto')
 export class Projeto {
@@ -26,4 +28,7 @@ export class Projeto {
 
   @ManyToOne(() => Cliente, (cliente) => cliente.projeto)
   cliente: Cliente;
+
+  @OneToMany(() => Dynamics, (dynamics) => dynamics.projeto)
+  dynamics: Dynamics;
 }
