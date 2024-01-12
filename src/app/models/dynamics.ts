@@ -15,7 +15,8 @@ export class DynamicsModel {
     this.urlBase = data.urlBase;
     this.urlContacts = data.urlContacts;
     this.clientId = data.clientId;
-    this.clienteSecret = data.scope = data.scope;
+    this.clienteSecret = data.clienteSecret;
+    this.scope = data.scope;
     this.resource = data.resource;
     this.sql = data.sql;
   }

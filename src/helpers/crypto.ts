@@ -1,27 +1,31 @@
+import { ICrypter } from '../app/useCase/encrypter';
 import crypto from 'crypto';
 
-const DATA_CRYPT = {
-  algorithm: 'aes-256-ocb',
-  secret: `${process.env.X_API_KEY}` as string,
-  type: 'hex',
-};
+export class Crypto implements ICrypter {
+  private readonly key = crypto.randomBytes(32);
+  private readonly iv = crypto.randomBytes(16);
+  private readonly algorithm = 'aes-256-cbc';
+  private readonly cypherKey = 'mySecretKey';
 
-export function encrypt(senha) {
-  const cipher = crypto.createDecipheriv(
-    DATA_CRYPT.algorithm,
-    DATA_CRYPT.secret,
-    DATA_CRYPT.type,
-  );
-  cipher.update(senha);
-  return cipher.final('hex');
-}
+  encrypt(value: string) {
+    const cipher = crypto.createCipheriv(
+      this.algorithm,
+      Buffer.from(this.key),
+      this.iv,
+    );
+    let crypted = cipher.update(value, 'utf8', 'hex');
+    crypted += cipher.final('hex');
+    return crypted;
+  }
 
-export function decrypt(senha) {
-  const decipher = crypto.createDecipheriv(
-    DATA_CRYPT.algorithm,
-    DATA_CRYPT.secret,
-    DATA_CRYPT.type,
-  );
-  decipher.update(senha, 'hex');
-  return decipher.final();
+  decrypt(value: string) {
+    const decipher = crypto.createDecipheriv(
+      'aes-256-cbc',
+      Buffer.from(this.key),
+      this.iv,
+    );
+    let dec = decipher.update(value, 'hex', 'utf8');
+    dec += decipher.final('utf8');
+    return dec;
+  }
 }
