@@ -1,13 +1,17 @@
 import { Projeto } from '../../entity/projeto';
-import { IPorjetoRepository } from '../IProjetoRepository';
+import { IProjetoRepository } from '../IProjetoRepository';
 import { AppDataSource } from '../../../database/data-source';
 import { ProjetoModel } from '../../models/projeto';
 import { Cliente } from '../../entity/cliente';
 
-export class ProjetoRepository implements IPorjetoRepository {
+export class ProjetoRepository implements IProjetoRepository {
   private projetoRepository = AppDataSource.getRepository(Projeto);
   private clienteRepository = AppDataSource.getRepository(Cliente);
 
+  async get(id: string): Promise<Projeto> {
+    const data = await this.projetoRepository.findOneBy({ id });
+    return data;
+  }
   async list(): Promise<Projeto[]> {
     const data = await this.projetoRepository.find({
       relations: {
@@ -26,6 +30,14 @@ export class ProjetoRepository implements IPorjetoRepository {
       status: model.status,
       cliente: cliente,
     });
+    return data;
+  }
+  async update(model: ProjetoModel): Promise<Projeto> {
+    await this.projetoRepository.update(model.id, {
+      nome: model.nome,
+      status: model.status,
+    });
+    const data = await this.projetoRepository.findOneBy({ id: model.id });
     return data;
   }
   async delete(id: string): Promise<void> {

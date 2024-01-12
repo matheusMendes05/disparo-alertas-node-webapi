@@ -1,6 +1,6 @@
 export class ProjetoModel {
   id?: string;
-  clienteId: string;
+  clienteId?: string;
   nome: string;
   status?: boolean;
   constructor(data: Data) {
@@ -13,7 +13,7 @@ export class ProjetoModel {
 
 type Data = {
   id?: string;
-  clienteId: string;
+  clienteId?: string;
   nome: string;
   status?: boolean;
 };

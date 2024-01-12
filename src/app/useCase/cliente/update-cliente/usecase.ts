@@ -5,7 +5,7 @@ import { IClienteRepository } from '../../../repository/IClienteRepository';
 export class UpdateClienteUseCase {
   constructor(private readonly clieteRepo: IClienteRepository) {}
 
-  async execute(params: ClienteModel): Promise<Cliente> {
+  async execute(params: Params): Promise<Cliente> {
     const cliente = new ClienteModel({
       id: params.id,
       nome: params.nome,
@@ -15,3 +15,9 @@ export class UpdateClienteUseCase {
     return data;
   }
 }
+
+type Params = {
+  id: string;
+  nome: string;
+  status: boolean;
+};

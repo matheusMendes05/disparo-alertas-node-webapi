@@ -1,18 +1,18 @@
 import { Request, Response } from 'express';
-import { UpdateClienteUseCase } from './usecase';
-import { ClienteModel } from '../../../models/cliente';
+import { UpdateProjetoUseCase } from './usecase';
 
-export class UpdateClienteController {
-  constructor(private readonly usecase: UpdateClienteUseCase) {}
-
+export class UpdateProjetoController {
+  constructor(private readonly usecase: UpdateProjetoUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {
+    const requiredFields = ['id', 'nome'];
+    for (const field of requiredFields) {
+      if (!request.body[field]) {
+        return response
+          .status(400)
+          .json({ statusCode: 400, message: `Missing param ${field}` });
+      }
+    }
     const { id, nome, status } = request.body;
-
-    if (!id)
-      return response
-        .status(200)
-        .json({ statusCode: 200, message: 'Missing parameter id' });
-
     try {
       const data = await this.usecase.execute({ id, nome, status });
       return response.status(200).json({ statusCode: 200, data: data });

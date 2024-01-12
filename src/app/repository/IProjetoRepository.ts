@@ -1,8 +1,10 @@
 import { Projeto } from '../entity/projeto';
 import { ProjetoModel } from '../models/projeto';
 
-export interface IPorjetoRepository {
+export interface IProjetoRepository {
+  get(id: string): Promise<Projeto>;
   list(): Promise<Projeto[]>;
-  save(projeto: ProjetoModel): Promise<Projeto>;
+  save(model: ProjetoModel): Promise<Projeto>;
+  update(model: ProjetoModel): Promise<Projeto>;
   delete(id: string): Promise<void>;
 }
