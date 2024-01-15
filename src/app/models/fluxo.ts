@@ -3,16 +3,14 @@ export class FluxoModel {
   projetoId?: string;
   nome?: string;
   status?: boolean;
-  chave?: string;
-  valor?: string;
+  flowId?: string;
 
   constructor(data: Data) {
     this.id = data?.id;
     this.projetoId = data?.projetoId;
     this.nome = data?.nome;
     this.status = data?.status ?? true;
-    this.chave = data?.chave;
-    this.valor = data?.valor;
+    this.flowId = data?.flowId;
   }
 }
 
@@ -21,6 +19,5 @@ type Data = {
   projetoId?: string;
   nome?: string;
   status?: boolean;
-  chave?: string;
-  valor?: string;
+  flowId?: string;
 };

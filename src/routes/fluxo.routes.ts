@@ -5,7 +5,7 @@ import { Router } from 'express';
 const fluxoRoutes = Router();
 
 // Add fluxo
-fluxoRoutes.post('/', (request, response) => {
+fluxoRoutes.post('/create', (request, response) => {
   return createFluxoController().handle(request, response);
 });
 

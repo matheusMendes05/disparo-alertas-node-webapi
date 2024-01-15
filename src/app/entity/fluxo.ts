@@ -19,10 +19,7 @@ export class Fluxo {
   status: boolean;
 
   @Column({ unique: true, nullable: true })
-  chave: string;
-
-  @Column({ unique: true, nullable: true })
-  valor: string;
+  flowId: string;
 
   @CreateDateColumn()
   created_at: Date;
