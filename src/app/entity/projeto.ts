@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Cliente } from './cliente';
 import { Dynamics } from './dynamics';
+import { Fluxo } from './fluxo';
 
 @Entity('projeto')
 export class Projeto {
@@ -34,4 +35,7 @@ export class Projeto {
     onDelete: 'CASCADE',
   })
   dynamics: Dynamics;
+
+  @OneToMany(() => Fluxo, (fluxo) => fluxo.projeto)
+  fluxo: Fluxo[];
 }

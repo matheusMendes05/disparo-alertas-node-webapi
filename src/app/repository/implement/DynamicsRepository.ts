@@ -22,8 +22,18 @@ export class DynamicsRepository implements IDynamicsRepository {
     const data = await this.dynamicsRepository.save(model);
     return data;
   }
-  update(model: DynamicsModel): Promise<Dynamics> {
-    throw new Error('Method not implemented.');
+  async update(model: DynamicsModel): Promise<Dynamics> {
+    await this.dynamicsRepository.update(model.id, {
+      urlBase: model.urlBase,
+      urlContacts: model.urlContacts,
+      clientId: model.clientId,
+      clienteSecret: model.clienteSecret,
+      scope: model.scope,
+      resource: model.resource,
+      sql: model.sql,
+    });
+    const data = await this.dynamicsRepository.findOneBy({ id: model.id });
+    return data;
   }
   async delete(id: string): Promise<void> {
     await this.dynamicsRepository.delete({ id });

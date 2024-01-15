@@ -8,6 +8,7 @@ export class Crypto implements ICrypter {
   private readonly cypherKey = 'mySecretKey';
 
   encrypt(value: string) {
+    if (!value) return undefined;
     const cipher = crypto.createCipheriv(
       this.algorithm,
       Buffer.from(this.key),

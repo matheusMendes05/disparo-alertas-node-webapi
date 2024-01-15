@@ -2,6 +2,7 @@ import listDynamicsController from '../app/useCase/dynamics/list-dynamics';
 import getDynamicsController from '../app/useCase/dynamics/get-dynamics';
 import deleteDynamicsController from '../app/useCase/dynamics/delete-dynamics';
 import createDynamicsController from '../app/useCase/dynamics/create-dynamics';
+import updateDynamicsController from '../app/useCase/dynamics/update-dynamics';
 
 import { Router } from 'express';
 
@@ -29,7 +30,7 @@ dynamicsRoutes.post('/create', (request, response) => {
 
 // Updated variables dynamics
 dynamicsRoutes.put('/', (request, response) => {
-  // return createDynamicsController().handle(request, response);
+  return updateDynamicsController().handle(request, response);
 });
 
 export { dynamicsRoutes };

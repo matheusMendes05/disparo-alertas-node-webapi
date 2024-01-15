@@ -2,8 +2,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -17,19 +15,19 @@ export class Dynamics {
   @OneToMany(() => Projeto, (projeto) => projeto.dynamics)
   projeto: Projeto[];
 
-  @Column({ unique: true, nullable: true })
+  @Column({ nullable: true })
   urlBase: string;
-  @Column({ unique: true, nullable: true })
+  @Column({ nullable: true })
   urlContacts: string;
-  @Column({ unique: true, nullable: true })
+  @Column({ nullable: true })
   clientId: string;
   @Column({ unique: true, nullable: true })
   clienteSecret: string;
-  @Column({ unique: true, nullable: true })
+  @Column({ nullable: true })
   scope: string;
-  @Column({ unique: true, nullable: true })
+  @Column({ nullable: true })
   resource: string;
-  @Column({ unique: true, nullable: true })
+  @Column({ nullable: true })
   sql: string;
   @CreateDateColumn()
   created_at: Date;
