@@ -5,7 +5,6 @@ export class CreateDynamicsController {
   constructor(private readonly usecase: CreateDynamicsUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {
     const requiredFields = [
-      'projetoId',
       'urlBase',
       'urlContacts',
       'clientId',
@@ -24,7 +23,6 @@ export class CreateDynamicsController {
     }
 
     const {
-      projetoId,
       urlBase,
       urlContacts,
       clientId,
@@ -36,7 +34,6 @@ export class CreateDynamicsController {
 
     try {
       const data = await this.usecase.execute({
-        projetoId,
         urlBase,
         urlContacts,
         clientId,

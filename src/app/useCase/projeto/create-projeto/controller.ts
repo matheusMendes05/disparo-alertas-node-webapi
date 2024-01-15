@@ -5,7 +5,7 @@ export class CreateProjetoController {
   constructor(private readonly usecase: CreateProjetoUseCase) {}
 
   async handle(request: Request, response: Response): Promise<Response> {
-    const requiredFields = ['clienteId', 'nome'];
+    const requiredFields = ['clienteId', 'dynamicsId', 'nome'];
     for (const field of requiredFields) {
       if (!request.body[field]) {
         return response
@@ -13,9 +13,14 @@ export class CreateProjetoController {
           .json({ statusCode: 400, message: `Missing param ${field}` });
       }
     }
-    const { clienteId, nome, status } = request.body;
+    const { clienteId, dynamicsId, nome, status } = request.body;
     try {
-      const data = await this.usecase.execute({ clienteId, nome, status });
+      const data = await this.usecase.execute({
+        clienteId,
+        dynamicsId,
+        nome,
+        status,
+      });
       return response.status(200).json({ statusCode: 200, data: data });
     } catch (error) {
       return response

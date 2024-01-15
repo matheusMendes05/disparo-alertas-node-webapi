@@ -6,6 +6,8 @@ export class CreateProjetoUseCase {
   constructor(private readonly projetoRepo: IProjetoRepository) {}
   async execute(params: Params): Promise<Projeto> {
     const projeto = new ProjetoModel({
+      clienteId: params.clienteId,
+      dynamicsId: params.dynamicsId,
       nome: params.nome,
       status: params.status,
     });
@@ -16,6 +18,7 @@ export class CreateProjetoUseCase {
 
 type Params = {
   clienteId: string;
+  dynamicsId: string;
   nome: string;
   status?: boolean;
 };

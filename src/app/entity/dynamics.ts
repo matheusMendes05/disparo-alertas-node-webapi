@@ -2,7 +2,9 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Projeto } from './projeto';
@@ -12,7 +14,7 @@ export class Dynamics {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => Projeto, (projeto) => projeto.dynamics)
+  @OneToMany(() => Projeto, (projeto) => projeto.dynamics)
   projeto: Projeto[];
 
   @Column({ unique: true, nullable: true })

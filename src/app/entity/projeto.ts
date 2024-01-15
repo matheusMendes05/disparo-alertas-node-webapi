@@ -29,6 +29,6 @@ export class Projeto {
   @ManyToOne(() => Cliente, (cliente) => cliente.projeto)
   cliente: Cliente;
 
-  @OneToMany(() => Dynamics, (dynamics) => dynamics.projeto)
+  @ManyToOne(() => Dynamics, (dynamics) => dynamics.projeto)
   dynamics: Dynamics;
 }

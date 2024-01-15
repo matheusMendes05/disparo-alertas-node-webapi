@@ -1,6 +1,5 @@
 export class DynamicsModel {
   id?: string;
-  projetoId?: string;
   urlBase: string;
   urlContacts: string;
   clientId: string;
@@ -11,7 +10,6 @@ export class DynamicsModel {
 
   constructor(data: Data) {
     this.id = data.id;
-    this.projetoId = data.projetoId;
     this.urlBase = data.urlBase;
     this.urlContacts = data.urlContacts;
     this.clientId = data.clientId;
@@ -24,7 +22,6 @@ export class DynamicsModel {
 
 type Data = {
   id?: string;
-  projetoId?: string;
   urlBase: string;
   urlContacts: string;
   clientId: string;

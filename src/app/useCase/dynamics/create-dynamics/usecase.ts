@@ -10,7 +10,6 @@ export class CreateDynamicsUseCase {
   ) {}
   async execute(params: DynamicsModel): Promise<Dynamics> {
     const dynamics = new DynamicsModel({
-      projetoId: params.projetoId,
       urlBase: await this.crypter.encrypt(params.urlBase),
       urlContacts: await this.crypter.encrypt(params.urlContacts),
       clientId: await this.crypter.encrypt(params.clientId),
