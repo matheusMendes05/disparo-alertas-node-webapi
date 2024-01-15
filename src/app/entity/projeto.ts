@@ -29,6 +29,9 @@ export class Projeto {
   @ManyToOne(() => Cliente, (cliente) => cliente.projeto)
   cliente: Cliente;
 
-  @ManyToOne(() => Dynamics, (dynamics) => dynamics.projeto)
+  @ManyToOne(() => Dynamics, (dynamics) => dynamics.projeto, {
+    cascade: true,
+    onDelete: 'CASCADE',
+  })
   dynamics: Dynamics;
 }
