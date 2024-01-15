@@ -11,8 +11,13 @@ export class DynamicsRepository implements IDynamicsRepository {
   get(id: string): Promise<Dynamics> {
     throw new Error('Method not implemented.');
   }
-  list(): Promise<Dynamics[]> {
-    throw new Error('Method not implemented.');
+  async list(): Promise<Dynamics[]> {
+    const data = await this.dynamicsRepository.find({
+      relations: {
+        projeto: true,
+      },
+    });
+    return data;
   }
   async save(model: DynamicsModel): Promise<Dynamics> {
     const projeto = await this.projetoRepository.findOneBy({
