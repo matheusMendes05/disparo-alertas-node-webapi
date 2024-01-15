@@ -6,13 +6,19 @@ import { IFluxoRepository } from '../IFluxoRepository';
 
 export class FluxoRepository implements IFluxoRepository {
   private readonly projetorepository = AppDataSource.getRepository(Projeto);
-  private readonly fluxoReposotory = AppDataSource.getRepository(Fluxo);
+  private readonly fluxoRepository = AppDataSource.getRepository(Fluxo);
 
-  get(id: string): Promise<Fluxo> {
-    throw new Error('Method not implemented.');
+  async get(id: string): Promise<Fluxo> {
+    const data = await this.fluxoRepository.findOneBy({ id });
+    return data;
   }
-  list(): Promise<Fluxo[]> {
-    throw new Error('Method not implemented.');
+  async list(): Promise<Fluxo[]> {
+    const data = await this.fluxoRepository.find({
+      relations: {
+        projeto: true,
+      },
+    });
+    return data;
   }
   async save(model: FluxoModel): Promise<Fluxo> {
     const projeto = await this.projetorepository.findOneBy({
@@ -20,7 +26,7 @@ export class FluxoRepository implements IFluxoRepository {
     });
     if (!projeto) throw new Error('Projeto does not exist');
 
-    const data = await this.fluxoReposotory.save({
+    const data = await this.fluxoRepository.save({
       nome: model.nome,
       status: model.status,
       flowId: model.flowId,
@@ -28,10 +34,17 @@ export class FluxoRepository implements IFluxoRepository {
     });
     return data;
   }
-  update(model: FluxoModel): Promise<Fluxo> {
-    throw new Error('Method not implemented.');
+  async update(model: FluxoModel): Promise<Fluxo> {
+    await this.fluxoRepository.update(model.id, {
+      nome: model.nome,
+      status: model.status,
+      flowId: model.flowId,
+    });
+
+    const data = await this.fluxoRepository.findOneBy({ id: model.id });
+    return data;
   }
-  delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<void> {
+    await this.fluxoRepository.delete({ id });
   }
 }
