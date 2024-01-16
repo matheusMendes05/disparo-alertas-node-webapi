@@ -9,6 +9,7 @@ import {
 import { Cliente } from './cliente';
 import { Dynamics } from './dynamics';
 import { Fluxo } from './fluxo';
+import { Historico } from './historico';
 
 @Entity('projeto')
 export class Projeto {
@@ -38,4 +39,7 @@ export class Projeto {
 
   @OneToMany(() => Fluxo, (fluxo) => fluxo.projeto)
   fluxo: Fluxo[];
+
+  @OneToMany(() => Historico, (historico) => historico.projeto)
+  historico: Historico[];
 }
