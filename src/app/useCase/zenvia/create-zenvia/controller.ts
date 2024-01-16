@@ -1,17 +1,10 @@
 import { Request, Response } from 'express';
-import { CreateFluxoUseCase } from './usecase';
+import { CreateZenviaUseCase } from './usecase';
 
-export class CreateFluxoController {
-  constructor(private readonly usecase: CreateFluxoUseCase) {}
-
+export class CreateZenviaController {
+  constructor(private readonly usecase: CreateZenviaUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {
-    const requiredFields = [
-      'projetoId',
-      'nome',
-      'status',
-      'flowId',
-      'zenviaId',
-    ];
+    const requiredFields = ['urlBase', 'xApiToken'];
     for (const field of requiredFields) {
       if (!request.body[field]) {
         return response
@@ -19,15 +12,9 @@ export class CreateFluxoController {
           .json({ statusCode: 400, message: `Missing param ${field}` });
       }
     }
-    const { projetoId, nome, status, flowId, zenviaId } = request.body;
+    const { urlBase, xApiToken } = request.body;
     try {
-      const data = await this.usecase.execute({
-        projetoId,
-        nome,
-        status,
-        flowId,
-        zenviaId,
-      });
+      const data = await this.usecase.execute({ urlBase, xApiToken });
       return response.status(200).json({ statusCode: 200, data: data });
     } catch (error) {
       return response

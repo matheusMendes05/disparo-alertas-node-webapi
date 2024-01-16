@@ -15,6 +15,7 @@ export class CreateFluxoUseCase {
       nome: params.nome,
       status: params.status,
       flowId: this.crypto.encrypt(params.flowId),
+      zenviaId: params.zenviaId,
     });
     const data = await this.fluxoRepo.save(fluxo);
     return data;
@@ -26,4 +27,5 @@ type Params = {
   nome: string;
   status: boolean;
   flowId: string;
+  zenviaId: string;
 };

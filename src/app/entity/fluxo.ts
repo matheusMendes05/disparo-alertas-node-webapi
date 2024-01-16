@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Projeto } from '../entity/projeto';
+import { Zenvia } from '../entity/zenvia';
 
 @Entity('fluxo')
 export class Fluxo {
@@ -29,4 +30,7 @@ export class Fluxo {
 
   @ManyToOne(() => Projeto, (projeto) => projeto.fluxo)
   projeto: Projeto;
+
+  @ManyToOne(() => Zenvia, (zenvia) => zenvia.fluxo)
+  zenvia: Zenvia;
 }

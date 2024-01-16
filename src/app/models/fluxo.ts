@@ -4,6 +4,7 @@ export class FluxoModel {
   nome?: string;
   status?: boolean;
   flowId?: string;
+  zenviaId?: string;
 
   constructor(data: Data) {
     this.id = data?.id;
@@ -11,6 +12,7 @@ export class FluxoModel {
     this.nome = data?.nome;
     this.status = data?.status ?? true;
     this.flowId = data?.flowId;
+    this.zenviaId = data?.zenviaId;
   }
 }
 
@@ -20,4 +22,5 @@ type Data = {
   nome?: string;
   status?: boolean;
   flowId?: string;
+  zenviaId?: string;
 };
