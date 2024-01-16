@@ -4,7 +4,7 @@ import { CreateHistoricoUseCase } from './usecase';
 export class CreateHistoricoController {
   constructor(private readonly usecase: CreateHistoricoUseCase) {}
   async handle(request: Request, response: Response): Promise<Response> {
-    const requiredFields = ['dataDisparo', 'qtdUsuarios'];
+    const requiredFields = ['dataDisparo', 'qtdUsuarios', 'projetoId'];
     for (const field of requiredFields) {
       if (!request.body[field]) {
         return response
@@ -13,12 +13,13 @@ export class CreateHistoricoController {
       }
     }
 
-    const { dataDisparo, qtdUsuarios, status } = request.body;
+    const { dataDisparo, qtdUsuarios, status, projetoId } = request.body;
     try {
       const data = await this.usecase.execute({
         dataDisparo,
         qtdUsuarios,
         status,
+        projetoId,
       });
       return response.status(200).json({ statusCode: 200, data: data });
     } catch (error) {
