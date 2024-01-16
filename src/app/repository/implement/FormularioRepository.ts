@@ -16,6 +16,7 @@ export class FormularioRepository implements IFormularioRepository {
     const data = await this.formularioRepository.find({
       relations: {
         projeto: true,
+        campo: true,
       },
     });
     return data;

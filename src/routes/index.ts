@@ -8,6 +8,8 @@ import { fluxoRoutes } from './fluxo.routes';
 import { zenviaRoutes } from './zenvia.routes';
 import { historicoRoutes } from './historico.routes';
 import { formularioRoutes } from './formulario.routes';
+import { campoRoutes } from './campo.routes';
+import { valorRoutes } from './valor.routes';
 
 const router = Router();
 
@@ -28,5 +30,9 @@ router.use('/api/zenvia', zenviaRoutes);
 router.use('/api/historico', historicoRoutes);
 // formulario
 router.use('/api/formulario', formularioRoutes);
+// campo
+router.use('/api/campo', campoRoutes);
+// valor
+router.use('/api/valor', valorRoutes);
 
 export { router };

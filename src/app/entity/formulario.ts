@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Projeto } from './projeto';
+import { Campo } from './campo';
 
 @Entity('formulario')
 export class Formulario {
@@ -23,4 +25,7 @@ export class Formulario {
 
   @ManyToOne(() => Projeto, (projeto) => projeto.formulario)
   projeto: Projeto;
+
+  @OneToMany(() => Campo, (campo) => campo.formulario)
+  campo: Campo[];
 }
