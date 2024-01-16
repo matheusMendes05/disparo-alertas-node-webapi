@@ -23,5 +23,5 @@ export class Historico {
   updated_at: Date;
 
   @ManyToOne(() => Projeto, (projeto) => projeto.historico)
-  projeto: Projeto[];
+  projeto: Projeto;
 }

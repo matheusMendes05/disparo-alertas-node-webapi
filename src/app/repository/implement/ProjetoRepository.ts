@@ -20,6 +20,7 @@ export class ProjetoRepository implements IProjetoRepository {
         cliente: true,
         dynamics: true,
         fluxo: true,
+        historico: true,
       },
     });
     return data;
