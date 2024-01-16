@@ -10,6 +10,7 @@ import { historicoRoutes } from './historico.routes';
 import { formularioRoutes } from './formulario.routes';
 import { campoRoutes } from './campo.routes';
 import { valorRoutes } from './valor.routes';
+import { infoWebRoutes } from './info-web.routes';
 
 const router = Router();
 
@@ -34,5 +35,7 @@ router.use('/api/formulario', formularioRoutes);
 router.use('/api/campo', campoRoutes);
 // valor
 router.use('/api/valor', valorRoutes);
+// web
+router.use('/api/info-web', infoWebRoutes);
 
 export { router };

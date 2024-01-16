@@ -24,6 +24,8 @@ export class Cliente {
   @CreateDateColumn()
   updated_at: Date;
 
-  @OneToMany(() => Projeto, (projeto) => projeto.cliente)
+  @OneToMany(() => Projeto, (projeto) => projeto.cliente, {
+    eager: true,
+  })
   projeto: Projeto[];
 }
