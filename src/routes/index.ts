@@ -5,6 +5,7 @@ import { clienteRoutes } from './cliente.routes';
 import { projetoRoutes } from './projeto.routes';
 import { dynamicsRoutes } from './dynamics.routes';
 import { fluxoRoutes } from './fluxo.routes';
+import { zenviaRoutes } from './zenvia.routes';
 
 const router = Router();
 
@@ -19,5 +20,7 @@ router.use('/api/projeto', projetoRoutes);
 router.use('/api/dynamics', dynamicsRoutes);
 // fluxo
 router.use('/api/fluxo', fluxoRoutes);
+// zenvia
+router.use('/api/zenvia', zenviaRoutes);
 
 export { router };

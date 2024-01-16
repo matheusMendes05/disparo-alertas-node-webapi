@@ -10,8 +10,13 @@ export class ZenviaRepository implements IZenviaRepository {
     const data = await this.zenviaRepository.findOneBy({ id });
     return data;
   }
-  list(): Promise<Zenvia[]> {
-    throw new Error('Method not implemented.');
+  async list(): Promise<Zenvia[]> {
+    const data = await this.zenviaRepository.find({
+      relations: {
+        fluxo: true,
+      },
+    });
+    return data;
   }
   async save(model: ZenviaModel): Promise<Zenvia> {
     const data = await this.zenviaRepository.save({
