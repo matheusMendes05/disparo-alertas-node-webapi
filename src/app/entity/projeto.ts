@@ -6,10 +6,12 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+
 import { Cliente } from './cliente';
 import { Dynamics } from './dynamics';
 import { Fluxo } from './fluxo';
 import { Historico } from './historico';
+import { Formulario } from './formulario';
 
 @Entity('projeto')
 export class Projeto {
@@ -42,4 +44,7 @@ export class Projeto {
 
   @OneToMany(() => Historico, (historico) => historico.projeto)
   historico: Historico[];
+
+  @OneToMany(() => Formulario, (formulario) => formulario.projeto)
+  formulario: Formulario[];
 }

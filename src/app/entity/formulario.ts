@@ -7,21 +7,20 @@ import {
 } from 'typeorm';
 import { Projeto } from './projeto';
 
-@Entity('historico')
-export class Historico {
+@Entity('formulario')
+export class Formulario {
   @PrimaryGeneratedColumn('uuid')
   id: string;
-  @Column({ nullable: true })
-  dataDisparo: Date;
+
   @Column()
-  qtdUsuarios: number;
-  @Column()
-  status: boolean;
+  titulo: string;
+
   @CreateDateColumn()
   created_at: Date;
+
   @CreateDateColumn()
   updated_at: Date;
 
-  @ManyToOne(() => Projeto, (projeto) => projeto.historico)
+  @ManyToOne(() => Projeto, (projeto) => projeto.formulario)
   projeto: Projeto;
 }
