@@ -4,7 +4,6 @@ import { AppDataSource } from '../../../database/data-source';
 import { ProjetoModel } from '../../models/projeto';
 import { Cliente } from '../../entity/cliente';
 import { Dynamics } from '../../entity/dynamics';
-import { createQueryBuilder } from 'typeorm';
 
 export class ProjetoRepository implements IProjetoRepository {
   private projetoRepository = AppDataSource.getRepository(Projeto);
@@ -55,28 +54,5 @@ export class ProjetoRepository implements IProjetoRepository {
   }
   async delete(id: string): Promise<void> {
     await this.projetoRepository.delete(id);
-  }
-  async listProjectbyClient(params: IProjetoRepository.Params): Promise<any> {
-    const data = await this.projetoRepository
-      .createQueryBuilder('projeto')
-      .innerJoinAndSelect('projeto.cliente', 'cliente')
-      .innerJoinAndSelect('projeto.dynamics', 'dynamics')
-      .innerJoinAndSelect('projeto.fluxo', 'fluxo')
-      .innerJoinAndSelect('fluxo.zenvia', 'zenvia')
-      .innerJoinAndSelect('projeto.formulario', 'formulario')
-      .innerJoinAndSelect('formulario.campo', 'campo')
-      .innerJoinAndSelect('campo.valor', 'valor')
-      .innerJoinAndSelect('projeto.historico', 'historico')
-      .where('cliente.id = :id', { id: params.clienteId })
-      .where('projeto.id = :id', { id: params.projetoId })
-      .getMany();
-
-    // .createQueryBuilder('projeto')
-    // .innerJoin(Cliente, 'cliente', 'cliente.id = :clienteId', {
-    //   clienteId: params.clienteId,
-    // })
-    // .getMany();
-
-    return data;
   }
 }

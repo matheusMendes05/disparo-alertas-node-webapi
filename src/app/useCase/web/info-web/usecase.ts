@@ -1,10 +1,10 @@
-import { IProjetoRepository } from '../../../repository/IProjetoRepository';
+import { IAlertaRepository } from '../../../repository/IAlertaRepository';
 
 export class InfoWebUseCase {
-  constructor(private readonly projetoRepo: IProjetoRepository) {}
+  constructor(private readonly alertaRepo: IAlertaRepository) {}
 
   async execute(params: Params): Promise<Result> {
-    const data = await this.projetoRepo.listProjectbyClient({
+    const data = await this.alertaRepo.getInfo({
       clienteId: params.clienteId,
       projetoId: params.projetoId,
     });
