@@ -1,12 +1,26 @@
-import { IAlertaRepository, IProjetoRepository } from '../IAlertaRepository';
+import { IAlertaRepository } from '../IAlertaRepository';
 import { Cliente } from '../../entity/cliente';
 
 import { AppDataSource } from '../../../database/data-source';
+import { Projeto } from '../../entity/projeto';
 
 export class AlertRepository implements IAlertaRepository {
-  private clienteRepository = AppDataSource.getRepository(Cliente);
+  private readonly clienteRepository = AppDataSource.getRepository(Cliente);
+  private readonly projetoRepository = AppDataSource.getRepository(Projeto);
 
-  async getInfo(params: IProjetoRepository.Params): Promise<any> {
+  async getInfo(
+    params: IAlertaRepository.Params,
+  ): Promise<IAlertaRepository.Result> {
+    const cliente = await this.clienteRepository.findOneBy({
+      id: params.clienteId,
+    });
+    if (!cliente) throw new Error('Cliente does not exist');
+
+    const projeto = await this.projetoRepository.findOneBy({
+      id: params.projetoId,
+    });
+    if (!projeto) throw new Error('Projeto does not exist');
+
     const data = await this.clienteRepository
       .createQueryBuilder('cliente')
       .innerJoinAndSelect('cliente.projeto', 'projeto')
@@ -16,9 +30,8 @@ export class AlertRepository implements IAlertaRepository {
       .innerJoinAndSelect('projeto.formulario', 'formulario')
       .innerJoinAndSelect('formulario.campo', 'campo')
       .innerJoinAndSelect('campo.valor', 'valor')
-      .innerJoinAndSelect('projeto.historico', 'historico')
       .where('cliente.id = :id', { id: params.clienteId })
-      .where('projeto.id = :id', { id: params.projetoId })
+      .orWhere('projeto.id = :id', { id: params.projetoId })
       .getMany();
     return data;
   }

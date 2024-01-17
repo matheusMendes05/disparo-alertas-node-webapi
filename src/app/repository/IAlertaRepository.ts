@@ -9,28 +9,14 @@ import { Zenvia } from '../entity/zenvia';
 
 export interface IAlertaRepository {
   // junção de todas as tabelas por cliente e projeto
-  getInfo(params: IProjetoRepository.Params): Promise<any>;
+  getInfo(params: IAlertaRepository.Params): Promise<IAlertaRepository.Result>;
 }
 
-export namespace IProjetoRepository {
+export namespace IAlertaRepository {
   export type Params = {
     clienteId: string;
     projetoId: string;
   };
 
-  export type Result = {
-    id: string;
-    nome: string;
-    status: boolean;
-    created_at: Date;
-    updated_at: Date;
-    cliente: Cliente[];
-    dynamics: Dynamics;
-    historico: Historico[];
-    formulario: Formulario;
-    fluxo: Fluxo[];
-    zenvia: Zenvia;
-    campo: Campo[];
-    valor: Valor[];
-  };
+  export type Result = Cliente[] | undefined;
 }
