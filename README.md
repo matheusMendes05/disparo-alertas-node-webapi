@@ -1,44 +1,8 @@
-### API CONSULTA PROMOÇÔES DA ALPHAFM
+# API DISPARO-ALERTAS-NODE-WEBAPI
 
-• Busca promoções de um banco SQL alimentado por "alphafm-mysql-script-node"
+> ## Descrição:
 
-• retorna todas as promocoes/promocao por ID
-
-### exemplos:
-
-http://localhost:3333/api/promocao/:any_id {
-statusCode: 200,
-results: [
-{
-id: any_id,
-texto: any_texto,
-slug: any_slug
-}
-]
-}
-
-http://localhost:3333/api/promocao/ {
-statusCode: 200,
-results: [
-{
-id: any_id,
-texto: any_texto,
-slug: any_slug
-}
-{
-id: any_id,
-texto: any_texto,
-slug: any_slug
-}
-{
-id: any_id,
-texto: any_texto,
-slug: any_slug
-}
-{
-id: any_id,
-texto: any_texto,
-slug: any_slug
-}
-]
-}
+- A criação dessa api surgiu da necessidade de facilitar o gerenciamento de: Clientes, Projetos e Formularios
+  através de uma plataforma.
+- O ADM será responsável por criar: clientes, projetos e seus repectivos formularios.
+- A api integrará com plataformas de CRM, com o objetivo de obter dados de clientes e realizará disparos em massa através de integrações com plataformas de Omnichannel.
