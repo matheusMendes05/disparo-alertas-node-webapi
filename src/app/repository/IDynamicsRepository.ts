@@ -7,4 +7,6 @@ export interface IDynamicsRepository {
   save(model: DynamicsModel): Promise<Dynamics>;
   update(model: DynamicsModel): Promise<Dynamics>;
   delete(id: string): Promise<void>;
+  // listando variaveis dynamics por projetoId
+  getByIdProjeto(projetoId: string): Promise<Dynamics>;
 }

@@ -38,4 +38,7 @@ export class DynamicsRepository implements IDynamicsRepository {
   async delete(id: string): Promise<void> {
     await this.dynamicsRepository.delete({ id });
   }
+  async getByIdProjeto(projetoId: string): Promise<Dynamics> {
+    throw new Error('Method not implemented');
+  }
 }
